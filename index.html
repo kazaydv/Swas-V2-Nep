@@ -11,8 +11,10 @@
   :root{
     --bg:#FBF6EC; --panel:#FFFEFA; --ink:#232A2E; --sub:#6B6459;
     --line: rgba(35,42,46,0.15); --accent:#2B3A36; --tag-bg:#EFE7D6; --gold:#9C8552;
+    --alarm:#C0392B;
   }
   *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
   body{
     margin:0; background:var(--bg); color:var(--ink);
     font-family:'Inter', 'Noto Sans Devanagari', system-ui, sans-serif;
@@ -71,41 +73,79 @@
   .cta{
     display:block; text-align:center; background:var(--accent); color:var(--bg); text-decoration:none;
     font-weight:600; font-size:17px; padding:16px 24px; border-radius:4px; margin-bottom:12px;
+    border:0; width:100%; font:inherit; cursor:pointer;
   }
   .cta:active{opacity:0.85;}
+  .cta[disabled]{opacity:.6; cursor:wait;}
   .guarantee{text-align:center; font-size:13px; color:var(--sub); margin-bottom:44px;}
+
+  /* ----- Order form ----- */
+  .order{background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:24px 20px 22px; margin:0 0 40px; scroll-margin-top:16px;}
+  .order h3{font-family:'Source Serif 4', 'Noto Serif Devanagari', Georgia, serif; font-weight:700; font-size:22px; margin:0 0 6px; color:var(--ink);}
+  .order .lede{font-size:13.5px; color:var(--sub); margin:0 0 20px;}
+  .pack{display:grid; grid-template-columns:22px 1fr auto; gap:0 12px; align-items:start; padding:14px 15px; border:1.5px solid var(--line); border-radius:4px; background:var(--bg); cursor:pointer; position:relative; margin-bottom:12px;}
+  .pack input{position:absolute; opacity:0; width:1px; height:1px;}
+  .pack .dot{width:18px; height:18px; border:2px solid var(--sub); border-radius:50%; margin-top:1px;}
+  .pack input:checked + .dot{border-color:var(--accent); background:radial-gradient(var(--accent) 42%, transparent 48%);}
+  .pack input:focus-visible + .dot{outline:3px solid var(--gold); outline-offset:2px;}
+  .pack:has(input:checked){border-color:var(--accent); background:#fff;}
+  .pk-name{font-weight:600; font-size:15.5px; line-height:1.3; color:var(--ink);}
+  .pk-desc{display:block; font-size:12.5px; color:var(--sub); margin-top:3px; line-height:1.4;}
+  .pk-save{display:inline-block; font-size:11.5px; font-weight:600; color:var(--accent); background:var(--tag-bg); padding:2px 7px; border-radius:2px; margin-top:6px;}
+  .pk-price{text-align:right; font-family:'Source Serif 4', 'Noto Serif Devanagari', serif; font-weight:700; font-size:19px; line-height:1.1; white-space:nowrap; color:var(--ink);}
+  .pk-price s{display:block; font-family:'Inter', 'Noto Sans Devanagari', sans-serif; font-weight:400; font-size:12px; color:var(--sub); margin-top:3px;}
+  .badge{font-style:normal; position:absolute; top:-9px; right:12px; background:var(--gold); color:#fff; font-size:10.5px; font-weight:600; padding:3px 8px; border-radius:2px;}
+  .field{margin-top:14px;}
+  .field label{display:block; font-size:13px; font-weight:600; margin-bottom:5px; color:var(--ink);}
+  .field input, .field textarea{width:100%; font:inherit; font-size:15px; padding:12px 13px; border:1px solid rgba(35,42,46,.3); border-radius:4px; background:#fff; color:var(--ink);}
+  .field textarea{min-height:76px; resize:vertical;}
+  .field.bad input, .field.bad textarea{border-color:var(--alarm);}
+  .err{display:none; color:var(--alarm); font-size:12.5px; margin-top:4px;}
+  .field.bad .err{display:block;}
+  .hp{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
+  .total{display:flex; justify-content:space-between; align-items:baseline; margin:18px 0 12px; padding-top:14px; border-top:1px solid var(--line); font-size:14px; color:var(--sub);}
+  .total b{font-family:'Source Serif 4', 'Noto Serif Devanagari', serif; font-size:22px; color:var(--ink);}
+  .form-err{display:none; background:#FBEAE7; border:1px solid #E7B5AE; color:#8E2A1F; font-size:13.5px; padding:11px 13px; border-radius:4px; margin-top:13px; line-height:1.5;}
+  .assure{text-align:center; font-size:12.5px; color:var(--sub); margin:11px 0 0; line-height:1.6;}
+  .success{display:none; text-align:center; padding:10px 4px 4px;}
+  .success h3{font-family:'Source Serif 4', 'Noto Serif Devanagari', Georgia, serif; margin:0 0 8px; font-size:19px;}
+  .success p{font-size:14.5px; color:var(--sub); line-height:1.6; margin:0 0 8px;}
+  .tick{width:44px; height:44px; border-radius:50%; background:var(--accent); color:var(--bg); display:grid; place-items:center; margin:0 auto 14px;}
+
   .faq{border-top:1px solid var(--line); padding-top:24px;}
   .faq h4{font-size:13px; margin:0 0 14px; color:var(--sub); font-weight:600; letter-spacing:0.02em;}
   .faq-item{border-bottom:1px solid var(--line); padding:13px 0;}
   .faq-item p.q{font-weight:600; font-size:15px; margin:0 0 4px;}
   .faq-item p.a{font-size:14.5px; color:var(--sub); margin:0; line-height:1.65;}
+
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="masthead">
-    <span><b>निद्रा र सास फेर्ने</b> &middot; स्वास्थ्य डेस्क</span>
+    <span><b>निद्रा र स्वास प्रश्वास</b> &middot; स्वास्थ्य डेस्क</span>
     <span>अप्रिल 2026</span>
   </div>
 
   <span class="tag">स्वास्थ्य विज्ञान</span>
   <h1>श्रीमती अर्कै कोठामा सुत्न थालिन्। श्रीमानलाई थाहै भएन किन।</h1>
   <p class="sub">समस्या वैवाहिक सम्बन्धमा थिएन। रातमा मुख खुला भएर सुत्ने बानीमा थियो — र यो धेरै दम्पतीले सोचेभन्दा सजिलै सुधार्न सकिन्छ।</p>
-  <p class="byline">निद्रा तथा श्वासप्रश्वास स्वास्थ्य डेस्क &middot; 6 मिनेट पढ्ने सामग्री</p>
+  <p class="byline">निद्रा तथा स्वास प्रश्वास स्वास्थ्य डेस्क &middot; 6 मिनेट पढाइ</p>
 
   <div class="trustbar">
     <div class="item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10V5l7-2 7 2v6c0 5.5-7 10-7 10Z" stroke-linejoin="round"></path><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-      <span>मेडिकल-ग्रेड, हाइपोएलर्जेनिक टेप</span>
+      <span>मेडिकल-ग्रेड, हाइपोएलर्जेनिक गुँद</span>
     </div>
     <div class="item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3" stroke-linecap="round"></path></svg>
-      <span>30-दिने पैसा फिर्ता ग्यारेन्टी</span>
+      <span>30-दिनको पैसा फिर्ता ग्यारेन्टी</span>
     </div>
     <div class="item">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="12" rx="2"></rect><path d="M3 10h18M7 14h4" stroke-linecap="round"></path></svg>
-      <span>डेलिभरीमा नगद तिर्ने सुविधा, नि:शुल्क</span>
+      <span>निःशुल्क क्यास अन डेलिभरी</span>
     </div>
   </div>
 
@@ -117,13 +157,13 @@
   <article>
     <p class="drop">उनलाई लाग्थ्यो, उनको घुर्ने बानी त्यति खराब छैन — जबसम्म श्रीमती चुपचाप पाहुना कोठामा सुत्न थालिनन्।</p>
     <p>यो धेरै दम्पतीले खुलेर स्विकार्न नचाहेको भए पनि निकै सामान्य कथा हो। एकजनाको निद्रा रात-रात बिग्रँदै जान्छ, जबसम्म उनीहरूले यसबारे कुरा गर्न छोडेर अर्कै ठाउँमा सुत्न थाल्दैनन्। यसलाई कमैले स्वास्थ्य समस्याको रूपमा हेर्छन् — बरु यसलाई सम्बन्धकै समस्या ठानिन्छ।</p>
-    <p>तर धेरैजसो घुर्ने समस्या श्रीमान वा श्रीमतीको मात्र समस्या होइन — यो सास फेर्ने समस्या हो। गहिरो निद्रामा बङ्गारा खुकुलो हुँदा मुख आफैं खुल्छ। नाकबाट भन्दा छिटो र अस्थिर गतिमा हावा भित्र पस्छ, र घाँटीको पछाडिको नरम तन्तु कम्पन गर्न थाल्छ। त्यही कम्पनको आवाजले नै दम्पतीलाई छुट्टाछुट्टै कोठामा पुर्‍याउँछ।</p>
+    <p>तर धेरैजसो घुर्ने समस्या श्रीमान वा श्रीमतीको मात्र समस्या होइन — यो सास फेर्ने समस्या हो। गहिरो निद्रामा बङ्गारा खुकुलो हुँदा मुख आफैं खुल्छ। बङ्गारा तल झर्छ, जिब्रो पछाडि सर्छ, सास नली साँघुरिन्छ र घाँटीको तन्तु कम्पन हुन्छ। त्यही कम्पनको आवाजले नै दम्पतीलाई छुट्टाछुट्टै कोठामा पुर्‍याउँछ।</p>
 
-    <p><strong>मुख हल्का बन्द रहिरह्यो भने, शरीर आफैं नाकबाट सास फेर्ने बानीमा फर्किन्छ</strong> — कुनै अभ्यास, प्रयास वा असजिलो कुराकानी नगरी। यही हो "माउथ-टेपिङ"को विचार, जसलाई निद्रा अनुसन्धानकर्ताहरूले वर्षौंदेखि अध्ययन गर्दै आएका छन्, अहिले यो एउटा सजिलो रातभरिको प्याचको रूपमा उपलब्ध छ।</p>
+    <p><strong>मुख बिस्तारै बन्द रहेपछि, शरीर आफैं नाकबाट सास फेर्नमा फर्किन्छ</strong> — कुनै अभ्यास, प्रयास वा असजिलो कुराकानी नगरी। यही हो "माउथ-टेपिङ"को विचार, जसलाई निद्रा अनुसन्धानकर्ताहरूले वर्षौंदेखि अध्ययन गर्दै आएका छन्, अहिले यो एउटा सजिलो रातभरिको पट्टीको रूपमा उपलब्ध छ।</p>
 
     <div class="solution">
       <h3>समाधान: SWAS Mouth Patch</h3>
-      <p>ओठमाथि रातभर लगाइने नरम र छालामैत्री स्ट्रिप। यसले मुखलाई आरामसँग बन्द राख्छ — पूरै टाँसिने गरी होइन — ताकि सुत्दा सास फेर्ने काम नाकबाट हुन्छ।</p>
+      <p>ओठमाथि रातभर लगाइने नरम, छालामैत्री पट्टी। यसले मुखलाई आरामदायी तरिकाले बन्द राख्छ — पूर्ण रूपमा टाँसिने होइन — ताकि सुत्दा सास नाकबाट फेरिन्छ।</p>
       <figure style="margin:16px 0 0;">
         <img src="Images/after.jpg" alt="SWAS Mouth Patch लगाएर शान्तसँग सुतिरहेको पुरुष, छेउमा श्रीमती सन्तुष्ट भई हेरिरहेको" style="border-radius:4px; border:1px solid var(--line);">
         <figcaption style="margin-top:8px; font-size:12.5px; color:var(--sub); text-align:center;">उही दम्पती, केही रातपछि।</figcaption>
@@ -131,48 +171,233 @@
     </div>
 
     <ul class="checks">
-      <li>रातभर शान्त र स्थिर नाकको सासलाई सहयोग गर्छ</li>
+      <li>सुत्दा नाकबाट सास फेर्न मद्दत गर्छ</li>
       <li>यति सामान्य देखिन्छ कि धेरैजसो जीवनसाथीले पत्तै पाउँदैनन्</li>
-      <li>हाइपोएलर्जेनिक, मेडिकल-ग्रेड टेप — दैनिक प्रयोगका लागि पनि सुरक्षित</li>
-      <li>जुनसुकै बेला खोल्न सजिलो; बङ्गारालाई जबरजस्ती बन्द गर्दैन</li>
+      <li>हाइपोएलर्जेनिक, ल्याटेक्स-रहित गुँद - हरेक रात प्रयोग गर्न मिल्ने खालको कोमल</li>
+      <li>जुनसुकै बेला खोल्न सजिलो; बङ्गारालाई जबरजस्ती बन्द गराइँदैन</li>
     </ul>
 
     <div class="proof">
       <div>विश्वसनीय<span>नेपालभरका हजारौंद्वारा</span></div>
-      <div>30-दिने<span>पैसा फिर्ता ग्यारेन्टी</span></div>
-      <div>COD<span>नेपालभर नि:शुल्क</span></div>
+      <div>30-दिन<span>पैसा फिर्ता ग्यारेन्टी</span></div>
+      <div>COD<span>नेपालभर निःशुल्क</span></div>
     </div>
   </article>
 
   <div class="offer">चाडपर्व अफर — <b>35% छुट</b> यो हप्ता मात्र</div>
   <div class="price-row">
-    <span class="old-price">Rs 1,500</span>
-    <span class="new-price">Rs 1,200</span>
+    <span class="old-price">रु 1,500</span>
+    <span class="new-price">रु 1,200</span>
   </div>
-  <a class="cta" href="https://swas.site/?utm_source=facebook&amp;utm_medium=paid_social&amp;utm_campaign=swas_launch&amp;utm_content=angle2_relationship_np#swas-package-wrapper">मेरो SWAS Patch मगाउनुहोस् — अहिले अर्डर गर्नुहोस्</a>
-  <p class="guarantee">नि:शुल्क क्यास अन डेलिभरी &middot; 30-दिने पैसा फिर्ता ग्यारेन्टी</p>
+  <a class="cta" href="#order">मेरो SWAS Patch मगाउनुहोस् — अहिले अर्डर गर्नुहोस्</a>
+  <p class="guarantee">निःशुल्क क्यास अन डेलिभरी &middot; 30-दिनको पैसा फिर्ता ग्यारेन्टी</p>
+
+  <!-- Order -->
+  <div class="order" id="order">
+    <form id="orderForm" novalidate>
+      <h3>आफ्नो प्याक छान्नुहोस्</h3>
+      <p class="lede">नेपालभर निःशुल्क डेलिभरी। सामान आइपुगेपछि मात्र पैसा तिर्नुहोस्।</p>
+
+      <label class="pack">
+        <input type="radio" name="pack" value="Starter Pack (1 box)" data-price="1200" data-list="1500" data-label="सुरुवात प्याक" >
+        <span class="dot"></span>
+        <span>
+          <span class="pk-name">सुरुवात प्याक</span>
+          <span class="pk-desc">1 बट्टा &middot; 30 प्याच &middot; 1 महिना</span>
+          <span class="pk-save">रु 300 बचत</span>
+        </span>
+        <span class="pk-price">रु 1,200<s>रु 1,500</s></span>
+      </label>
+
+      <label class="pack">
+        <em class="badge">सबैभन्दा लोकप्रिय</em>
+        <input type="radio" name="pack" value="Value Pack (2 boxes)" data-price="1900" data-list="3000" data-label="भ्यालु प्याक" checked>
+        <span class="dot"></span>
+        <span>
+          <span class="pk-name">भ्यालु प्याक</span>
+          <span class="pk-desc">2 बट्टा &middot; 60 प्याच &middot; 2 महिना<br>प्रति बट्टा रु 950</span>
+          <span class="pk-save">रु 1,100 बचत</span>
+        </span>
+        <span class="pk-price">रु 1,900<s>रु 3,000</s></span>
+      </label>
+
+      <label class="pack">
+        <input type="radio" name="pack" value="Complete Pack (3 boxes)" data-price="2400" data-list="4500" data-label="कम्प्लिट प्याक">
+        <span class="dot"></span>
+        <span>
+          <span class="pk-name">कम्प्लिट प्याक</span>
+          <span class="pk-desc">3 बट्टा &middot; 90 प्याच &middot; 3 महिना<br>प्रति बट्टा रु 800</span>
+          <span class="pk-save">रु 2,100 बचत</span>
+        </span>
+        <span class="pk-price">रु 2,400<s>रु 4,500</s></span>
+      </label>
+
+      <div class="field" id="f-name">
+        <label for="name">पूरा नाम</label>
+        <input id="name" name="name" type="text" autocomplete="name" placeholder="तपाईंको नाम">
+        <div class="err">कृपया आफ्नो नाम लेख्नुहोस्।</div>
+      </div>
+      <div class="field" id="f-phone">
+        <label for="phone">फोन नम्बर</label>
+        <input id="phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="98XXXXXXXX">
+        <div class="err">कृपया 10 अंकको नेपाली मोबाइल नम्बर लेख्नुहोस्।</div>
+      </div>
+      <div class="field" id="f-address">
+        <label for="address">डेलिभरी ठेगाना</label>
+        <textarea id="address" name="address" autocomplete="street-address" placeholder="शहर, क्षेत्र, सडक, ल्यान्डमार्क"></textarea>
+        <div class="err">कृपया आफ्नो डेलिभरी ठेगाना लेख्नुहोस्।</div>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
+
+      <div class="total"><span>जम्मा रकम, डेलिभरीमा तिर्ने</span><b id="total">रु 1,200</b></div>
+      <button class="cta" type="submit" id="submitBtn">मेरो अर्डर गर्नुहोस्</button>
+      <div class="form-err" id="formErr" role="alert"></div>
+      <p class="assure">निःशुल्क क्यास अन डेलिभरी &middot; 30-दिनको पैसा फिर्ता ग्यारेन्टी<br>2&ndash;3 कार्यदिनभित्र डेलिभरी</p>
+    </form>
+
+    <div class="success" id="success" role="status">
+      <div class="tick"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></div>
+      <h3>धन्यवाद। तपाईंको अर्डर प्राप्त भयो।</h3>
+      <p id="successMsg"></p>
+      <p>प्रश्न छ? <a href="tel:9740265823">9740265823</a> मा फोन गर्नुहोस्।</p>
+    </div>
+  </div>
 
   <div class="faq">
-    <h4>प्रायः सोधिने केही प्रश्नहरू</h4>
+    <h4>मानिसहरूले सोध्ने केही प्रश्नहरू</h4>
     <div class="faq-item">
-      <p class="q">के मेरो जीवनसाथीले म यो लगाएको थाहा पाउलान्?</p>
-      <p class="a">यो एकदमै पातलो र नदेखिने खालको स्ट्रिप हो — अँध्यारोमा धेरैजसो जीवनसाथीले पत्तै पाउँदैनन्। उनीहरूले चाल पाउने कुरा त शान्त सास मात्र हो।</p>
+      <p class="q">घुर्नुको मतलब मलाई sleep apnea छ भन्ने हो?</p>
+      <p class="a">सधैं होइन। धेरै मानिस sleep apnea नभई पनि घुर्छन्, तर हरेक रात ठूलो स्वरमा घुर्नु यसको एउटा सामान्य लक्षण हो। यो पेज सामान्य जानकारीका लागि मात्र हो, निदान होइन — निद्रा वा सास फेर्नेसम्बन्धी लगातार समस्या भए कृपया डाक्टरलाई भेट्नुहोस्।</p>
     </div>
     <div class="faq-item">
-      <p class="q">के मुख खोल्नै नसक्ने जस्तो महसुस हुन्छ?</p>
-      <p class="a">होइन। यसले ओठलाई हल्का गरी जोडेर राख्छ, तर चाहेमा तपाईं मुख खोल्न सक्नुहुन्छ — यो कसिलो सील होइन।</p>
+      <p class="q">के यसले मुख खोल्नै नसकिने जस्तो महसुस गराउँछ?</p>
+      <p class="a">होइन। यसले ओठलाई बिस्तारै मिलाएर राख्छ, तर आवश्यक परे तपाईं अझै मुख खोल्न सक्नुहुन्छ — यो कसिलो सील होइन।</p>
+    </div>
+    <div class="faq-item">
+      <p class="q">के यो हरेक रात प्रयोग गर्न सुरक्षित छ?</p>
+      <p class="a">यसको गुँद हाइपोएलर्जेनिक र ल्याटेक्स-रहित छ, र हरेक रात प्रयोगका लागि नै डिजाइन गरिएको हो। हरेक प्याच एक पटक मात्र प्रयोग गर्नका लागि हो। छालामा जलन महसुस भए प्रयोग बन्द गर्नुहोस्।</p>
     </div>
     <div class="faq-item">
       <p class="q">कति चाँडो फरक महसुस हुन्छ?</p>
-      <p class="a">धेरै दम्पतीले पहिलो प्रयोगबाटै शान्त रातको फरक महसुस गर्छन्। पूर्ण सुधार सामान्यतया 1–2 हप्तामा देखिन्छ।</p>
+      <p class="a">केही मानिसले पहिलो केही रातभित्रै शान्त र सहज सास फेराइ महसुस गर्छन्। परिणाम फरक-फरक हुन सक्छ, र पूर्ण सुधार हुन 1–2 हप्तासम्म लाग्न सक्छ।</p>
+    </div>
+    <div class="faq-item">
+      <p class="q">अर्डर र भुक्तानी कसरी हुन्छ?</p>
+      <p class="a">माथिको फारम भर्नुहोस्। हामी पुष्टि गर्न तपाईंलाई सम्पर्क गर्छौं, त्यसपछि नेपालको जुनसुकै ठाउँमा 2–3 कार्यदिनभित्र डेलिभरी गर्छौं। सामान आइपुगेपछि मात्र पैसा तिर्नुहोस्। डेलिभरी निःशुल्क छ।</p>
+    </div>
+    <div class="faq-item">
+      <p class="q">मलाई यो काम नलागे के हुन्छ?</p>
+      <p class="a">तपाईं हाम्रो 30-दिनको पैसा फिर्ता ग्यारेन्टीअन्तर्गत सुरक्षित हुनुहुन्छ। 9740265823 मा फोन गर्नुहोस् वा patchswas@gmail.com मा इमेल गर्नुहोस्।</p>
     </div>
   </div>
 
   <footer>
-    SWAS Mouth Patch &middot; ग्राहक सेवा: 9740265823 &middot; patchswas@gmail.com<br>
+    SWAS Mouth Patch &middot; ग्राहक सहायता: 9740265823 &middot; patchswas@gmail.com<br>
     <a href="https://swas.site/">swas.site</a>
   </footer>
 
 </div>
+
+<script>
+/* =====================  SETTINGS  ===================== */
+var SHEET_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzheDAonMwG5Jh0gBV0OhzHhoHP62q54d5z9jHByob6jlYNdrKYTv2z5lxnrBFzYQ/exec'; // this page's own Google Sheet order endpoint
+var PIXEL_ID = '';                                              // Meta Pixel ID (optional)
+/* ===================================================== */
+
+/* ---------- Meta Pixel ---------- */
+(function(){
+  if (!PIXEL_ID) { window.fbq = function(){}; return; }
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', PIXEL_ID); fbq('track', 'PageView'); fbq('track', 'ViewContent', {content_name:'SWAS Mouth Patch', currency:'NPR', value:1200});
+})();
+
+/* ---------- Order form ---------- */
+(function(){
+  var form = document.getElementById('orderForm');
+  var totalEl = document.getElementById('total');
+  var btn = document.getElementById('submitBtn');
+  var formErr = document.getElementById('formErr');
+  var started = false;
+  function money(n){ return 'रु ' + n.toLocaleString('en-US'); }
+  function selected(){ return form.querySelector('input[name="pack"]:checked'); }
+  function updateTotal(){ totalEl.textContent = money(parseInt(selected().getAttribute('data-price'), 10)); }
+  form.addEventListener('change', function(e){ if (e.target.name === 'pack') updateTotal(); });
+  form.addEventListener('focusin', function(){ if (!started){ started = true; fbq('track', 'InitiateCheckout'); } });
+  updateTotal();
+
+  function setBad(id, bad){ document.getElementById(id).classList.toggle('bad', bad); }
+  function cleanPhone(v){
+    var d = (v || '').replace(/\D/g, '');
+    if (d.length === 13 && d.indexOf('977') === 0) d = d.slice(3);
+    return d;
+  }
+  ['name','phone','address'].forEach(function(k){
+    document.getElementById(k).addEventListener('input', function(){ setBad('f-' + k, false); });
+  });
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    formErr.style.display = 'none';
+    var name = form.name.value.trim();
+    var phone = cleanPhone(form.phone.value);
+    var address = form.address.value.trim();
+    var okName = name.length >= 2, okPhone = /^9\d{9}$/.test(phone), okAddr = address.length >= 6;
+    setBad('f-name', !okName); setBad('f-phone', !okPhone); setBad('f-address', !okAddr);
+    if (!(okName && okPhone && okAddr)){
+      var first = form.querySelector('.field.bad input, .field.bad textarea'); if (first) first.focus();
+      return;
+    }
+    var pack = selected();
+    var price = parseInt(pack.getAttribute('data-price'), 10);
+
+    // bots fill the hidden field: pretend it worked, send nothing
+    if (form.company.value){ showSuccess(pack.getAttribute('data-label') || pack.value, phone); return; }
+
+    if (!SHEET_ENDPOINT || SHEET_ENDPOINT.indexOf('PASTE_') === 0){
+      formErr.textContent = 'अर्डर फारम अझै तपाईंको Google Sheet सँग जोडिएको छैन। पेज सेटिङमा आफ्नो Apps Script लिंक थप्नुहोस्।';
+      formErr.style.display = 'block'; return;
+    }
+
+    var q = new URLSearchParams(window.location.search);
+    var fd = new FormData();
+    fd.append('name', name);
+    fd.append('phone', phone);
+    fd.append('address', address);
+    fd.append('pack', pack.value);
+    fd.append('price', String(price));
+    fd.append('utm_source', q.get('utm_source') || '');
+    fd.append('utm_medium', q.get('utm_medium') || '');
+    fd.append('utm_campaign', q.get('utm_campaign') || '');
+    fd.append('utm_content', q.get('utm_content') || '');
+    fd.append('page', window.location.href.split('?')[0]);
+
+    btn.disabled = true; btn.textContent = 'तपाईंको अर्डर पठाइँदै…';
+
+    /* keepalive:true lets this request survive even if the visitor closes
+       the tab right after tapping submit. mode:'no-cors' still means this
+       .then() firing only confirms the browser sent the request, never
+       that Code.gs actually wrote a row to the Sheet — that can only be
+       confirmed in Apps Script's own Executions log. */
+    fetch(SHEET_ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, body: fd })
+      .then(function(){
+        fbq('track', 'Purchase', { value: price, currency: 'NPR', content_name: pack.value });
+        showSuccess(pack.getAttribute('data-label') || pack.value, phone);
+      })
+      .catch(function(){
+        btn.disabled = false; btn.textContent = 'मेरो अर्डर गर्नुहोस्';
+        formErr.textContent = "हामी तपाईंको अर्डर पठाउन सकेनौं। कृपया आफ्नो इन्टरनेट जाँच गरेर फेरि प्रयास गर्नुहोस्, वा 9740265823 मा फोन गर्नुहोस्।";
+        formErr.style.display = 'block';
+      });
+  });
+
+  function showSuccess(packName, phone){
+    form.style.display = 'none';
+    document.getElementById('successMsg').textContent = 'हामीले तपाईंको ' + packName + ' को लागि अर्डर प्राप्त गर्यौं। डेलिभरी सुनिश्चित गर्न हामी तपाईंलाई ' + phone + ' मा सम्पर्क गर्नेछौं। सामान आइपुगेपछि मात्र पैसा तिर्नुहोस्।';
+    document.getElementById('success').style.display = 'block';
+    document.getElementById('order').scrollIntoView({behavior: 'smooth', block: 'start'});
+  }
+})();
+</script>
 
 </body></html>
