@@ -81,6 +81,8 @@
 
   /* ----- Order form ----- */
   .order{background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:24px 20px 22px; margin:0 0 40px; scroll-margin-top:16px;}
+  .banner{margin:0 0 18px; text-align:center;}
+  .banner img{width:100%; max-width:220px; margin:0 auto; border-radius:6px; border:1px solid var(--line);}
   .order h3{font-family:'Source Serif 4', 'Noto Serif Devanagari', Georgia, serif; font-weight:700; font-size:22px; margin:0 0 6px; color:var(--ink);}
   .order .lede{font-size:13.5px; color:var(--sub); margin:0 0 20px;}
   .pack{display:grid; grid-template-columns:22px 1fr auto; gap:0 12px; align-items:start; padding:14px 15px; border:1.5px solid var(--line); border-radius:4px; background:var(--bg); cursor:pointer; position:relative; margin-bottom:12px;}
@@ -194,12 +196,14 @@
 
   <!-- Order -->
   <div class="order" id="order">
+    <figure class="banner"><img src="Images/product-banner.jpg" alt="SWAS Mouth Patch को बट्टा र प्याचहरू" width="800" height="489"></figure>
+
     <form id="orderForm" novalidate>
       <h3>आफ्नो प्याक छान्नुहोस्</h3>
       <p class="lede">नेपालभर निःशुल्क डेलिभरी। सामान आइपुगेपछि मात्र पैसा तिर्नुहोस्।</p>
 
       <label class="pack">
-        <input type="radio" name="pack" value="Starter Pack (1 box)" data-price="1200" data-list="1500" data-label="सुरुवात प्याक" >
+        <input type="radio" name="pack" value="Starter Pack (1 box)" data-price="1200" data-list="1500" data-label="सुरुवात प्याक">
         <span class="dot"></span>
         <span>
           <span class="pk-name">सुरुवात प्याक</span>
@@ -250,7 +254,7 @@
 
       <div class="hp" aria-hidden="true"><label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label></div>
 
-      <div class="total"><span>जम्मा रकम, डेलिभरीमा तिर्ने</span><b id="total">रु 1,200</b></div>
+      <div class="total"><span>जम्मा रकम, डेलिभरीमा तिर्ने</span><b id="total">रु 1,900</b></div>
       <button class="cta" type="submit" id="submitBtn">मेरो अर्डर गर्नुहोस्</button>
       <div class="form-err" id="formErr" role="alert"></div>
       <p class="assure">निःशुल्क क्यास अन डेलिभरी &middot; 30-दिनको पैसा फिर्ता ग्यारेन्टी<br>2&ndash;3 कार्यदिनभित्र डेलिभरी</p>
